@@ -1,0 +1,37 @@
+{%load static%}
+{%load custom_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{%static 'css/style.css'%}">
+	<title></title>
+</head>
+<body>
+<div class='content'>
+	<header >
+		<a href="" title="" id='home'>home</a>
+
+		<div class='category'>
+				
+			{%category_list as categories%}
+				{%for cat in categories%}
+			<a href="" title="">{{cat.name}}</a>
+			
+			{%endfor%}
+
+		</div>
+		<a href="" title="">login</a>
+		<a href="" title="">profile</a>
+	</header>
+	
+		{%block content%}
+		{%endblock%}
+		
+	
+	<footer>footer</footer>
+	
+</div>
+</body>
+</html>
