@@ -1,0 +1,68 @@
+{%extends 'shop/base.html'%}
+{% load static%}
+
+{% block title%}
+cart history
+{%endblock%}
+
+{%block content%}
+
+{%if carts%}
+<main>
+	
+<table class='table'>
+	<caption>your Cart history</caption>
+	<thead>
+		<tr>
+			<th>image</th>
+			<th>product</th>
+			<th>quantity</th>
+			<th>per price</th>
+			<th>price</th>
+			<th>remove</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		{%for cart in carts %}
+		{%with product=cart.product%}
+		<tr>
+			<td><a href="{%url 'product-detail' product.id product.slug%}" title=""><img src="{%if product.image%}{{product.image.url}}{%else%}{%static 'image/no_image.jpg'%}{%endif%}" width=100 height=100></a></td>
+			<td>{{cart.product}}</td>
+			<td><form action="{%url 'add-cart' product.id %}" method="post" >
+					{%csrf_token%}
+					{{cart.updated_cart.quantity}}
+					{{cart.updated_cart.override}}
+					<input type="submit" value="update">
+				</form>
+				
+			</td>
+			<td>{{cart.price}}</td>
+			<td>{{cart.total_price}}</td>
+			<td>
+				<form action="{%url 'remove-cart' product.id %}" method="post" >
+					{%csrf_token%}
+					<input type="submit" value="remove">
+					
+				</form>
+				
+			</td>
+		</tr>
+		{%endwith%}
+		{%endfor%}
+		<tr class="total">
+			<td>Total</td>
+			<td colspan="4"></td>
+			<td class="num">${{carts.get_total_price}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="{%url 'product-list'%}" title="">continue purchase</a>
+</main>
+{%else%}
+<main>
+	<h1>your cart history is  empty</h1>
+</main>
+{%endif%}
+{%endblock%}
