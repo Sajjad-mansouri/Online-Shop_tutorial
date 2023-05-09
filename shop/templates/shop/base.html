@@ -26,9 +26,13 @@
 		<a href="" title="">profile</a>
 		<div class='cart'>
 			{%with total_cart=cart|length%}
+			{%if total_cart > 0 %}
 
 		<a href="{%url 'cart-detail'%}"><span>your cart: {{total_cart}} items</span></a>	
 		<span>{{ cart.get_total_price }}</span>
+		{%else%}
+		your cart is empty
+		{%endif%}
 		{%endwith%}
 		</div>
 		
