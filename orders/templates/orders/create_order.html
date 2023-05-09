@@ -1,0 +1,27 @@
+{%extends 'shop/base.html'%}
+
+{%block content%}
+<main>
+	<form action="" method="post" >
+		{%csrf_token%}
+		{{form}}
+		<input type="submit" >
+	</form>
+
+</main>
+<aside>
+	<ul>
+		{%for item in cart%}
+		<li>{{item.quantity}} {{item.product.name}}
+			<span>{{item.total_price}}</span>
+		</li>
+		{%endfor%}
+
+	</ul>
+	<p>total cost:{{cart.get_total_price}}</p>
+	
+
+
+	
+</aside>
+{%endblock%}
