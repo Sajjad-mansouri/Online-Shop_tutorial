@@ -2,6 +2,7 @@ import csv
 import datetime
 from django.http import HttpResponse
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from .models import Order,OrderItem
 
 
@@ -36,7 +37,8 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-	list_display=['first_name','last_name','email','address','city','postalcode','paid','created','updated']
+	list_display=['first_name','last_name','email',
+	'address','city','postalcode','paid','created','updated','order_detail']
 	list_filter=['paid','created','updated']
 	inlines=[OrderItemInline]
 	actions=[export_to_csv]

@@ -1,0 +1,85 @@
+{%extends 'admin/base.html'%}
+
+{%block breadcrumbs%}
+
+<div class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">Home</a>&rsaquo;
+            <a href="{% url "admin:orders_order_changelist" %}">Orders</a>&rsaquo;
+            <a href="{% url 'admin:orders_order_change' order.id %}">Order {{ order.id}}
+</a>
+&rsaquo;
+detail
+</div>
+
+{%endblock%}
+
+{%block content%}
+<div class='module'>
+    <h1>Order{{order.id}}</h1>
+    <ul class='object-tools'>
+        <li>
+            <a href="#" onclick="window.print()">print order</a>
+        </li>
+    </ul>
+    <table>
+        <tr>
+            <th>created</th>
+            <td>{{order.created}}</td>
+        </tr>
+        <tr>
+            <th>customer</th>
+            <td>{{order.first_name}} {{order.last_name}}</td>
+        </tr>
+         <tr>
+            <th>email</th>
+            <td>{{order.email}} </td>
+        </tr>
+        <tr>
+            <th>address</th>
+            <td>{{order.address}},{{order.postalcode}},{{order.city}}</td>
+        </tr>
+      
+        <tr>
+            <th>total amount</th>
+            <td>${{order.get_total_cost}}</td>
+        </tr>
+         <tr>
+            <th>status</th>
+            <td>{%if order.paid%}paid{%else%}unpaid{%endif%}</td>
+        </tr>
+        
+    </table>
+</div>
+
+<div class="module">
+    <h2>item bought</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>product</th>
+                <th>price</th>
+                <th>quantity</th>
+                <th>total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for product in order.order_items.all%}
+            <tr>
+                <td>{{product.product}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.get_price}}</td>
+
+            </tr>
+            {%endfor%}
+            <tr>
+                <td>total</td>
+                <td></td>
+                <td></td>
+                <td>{{order.get_total_cost}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+{%endblock%}

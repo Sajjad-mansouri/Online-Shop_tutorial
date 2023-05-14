@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.safestring import mark_safe
+from django.urls import reverse
 from shop.models import Product
 
 class Order(models.Model):
@@ -11,6 +13,10 @@ class Order(models.Model):
 	created=models.DateTimeField(auto_now_add=True)
 	updated=models.DateTimeField(auto_now=True)
 	paid=models.BooleanField(default=False)
+
+	def order_detail(self):
+		url=reverse('admin-order',args=[self.id])
+		return mark_safe(f'<a href="{url}">detail</a>')
 
 	class Meta:
 		ordering=['-created']
