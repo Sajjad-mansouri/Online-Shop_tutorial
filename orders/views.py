@@ -9,7 +9,8 @@ from django.template.loader import render_to_string
 from cart.cart import Cart
 from .models import OrderItem,Order
 from .forms import OrderForm
-from .tasks import order_created
+from .tasks import order_created,email_pdf
+
 
 
 
@@ -26,6 +27,7 @@ def create_order(request):
 			cart.clear()
 			# time.sleep(60)
 			order_created.delay(order.id)
+			email_pdf.delay(order.id)
 			return render(request,'orders/create_order_done.html',{'order':order})
 
 	else:
