@@ -55,11 +55,23 @@ cart history
 			<td colspan="4"></td>
 			<td class="num">${{carts.get_total_price}}</td>
 		</tr>
+		{%if carts.coupon%}
+		<tr class="total_with_discount">
+			<td>Total after discount</td>
+			<td colspan="4"></td>
+			<td class="num">${{carts.get_total_price_with_discount}}</td>
+		</tr>
+		{%endif%}
 	</tbody>
 </table>
-
+<form method='post' action='{%url "apply-coupon"%}'>
+	{%csrf_token%}
+	{{coupon_form}}
+	<input type="submit" value='apply'>
+</form>
 <a href="{%url 'product-list'%}" title="">continue purchase</a>
 <a href="{%url 'create-order'%}" title="">checkout</a>
+
 </main>
 {%else%}
 <main>

@@ -4,6 +4,7 @@ from .cart import Cart
 from shop.models import Product
 from .forms import ProductCartForm
 from django.conf import settings
+from coupons.forms import CouponForm
 
 
 @require_POST
@@ -27,7 +28,10 @@ def remove_cart(request,product_id):
 	return redirect('cart-detail')
 
 def cart_detail(request):
+	coupon_form=CouponForm()
 	carts=Cart(request)
 	for cart in carts:
 		cart['updated_cart']=ProductCartForm(initial={'quantity':cart['quantity'],'override':True})
-	return render(request,'cart/cart_detail.html',{'carts':carts})
+
+
+	return render(request,'cart/cart_detail.html',{'carts':carts,'coupon_form':coupon_form})
