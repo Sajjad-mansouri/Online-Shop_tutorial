@@ -12,13 +12,16 @@
 <aside>
 	<ul>
 		{%for item in cart%}
-		<li>{{item.quantity}} {{item.product.name}}
+		<li>{{item.quantity}} * {{item.product.name}}
 			<span>{{item.total_price}}</span>
 		</li>
 		{%endfor%}
+		<li>discount:
+			<span class='discount'>{{cart.discount}}</span>
+		</li>
 
 	</ul>
-	<p>total cost:{{cart.get_total_price}}</p>
+	<p>total cost:{{cart.get_total_price_with_discount}}</p>
 	
 
 

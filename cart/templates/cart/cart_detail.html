@@ -56,6 +56,11 @@ cart history
 			<td class="num">${{carts.get_total_price}}</td>
 		</tr>
 		{%if carts.coupon%}
+		<tr class="discount">
+			<td>discount</td>
+			<td colspan="4"></td>
+			<td class="num">-${{carts.discount}}</td>
+		</tr>
 		<tr class="total_with_discount">
 			<td>Total after discount</td>
 			<td colspan="4"></td>

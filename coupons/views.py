@@ -11,7 +11,7 @@ def apply_coupon(request):
 		code=coupon_form.cleaned_data['code']
 		time=timezone.now()
 		try:
-			print('before')
+			
 			
 			coupon=Coupon.objects.get(code__iexact=code,
 										valid_from__lte=time,
@@ -21,8 +21,10 @@ def apply_coupon(request):
 			
 			request.session['coupon_id']=coupon.id
 		except Coupon.DoesNotExist as e:
+			
 			request.session['coupon_id']=None
 
+	
 	coupon_form=CouponForm()
 	return redirect('cart-detail')
 

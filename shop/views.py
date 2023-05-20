@@ -5,6 +5,10 @@ from cart.forms import ProductCartForm
 
 
 def product_list(request,category_slug=None):
+
+	for key in request.session.keys():
+		value=request.session[key]
+		print('key:',key,', value:',value)
 	category=None
 	categories=Category.objects.all()
 	products=Product.objects.filter(available=True)

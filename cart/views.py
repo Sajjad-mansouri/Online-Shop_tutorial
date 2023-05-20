@@ -28,10 +28,11 @@ def remove_cart(request,product_id):
 	return redirect('cart-detail')
 
 def cart_detail(request):
+
 	coupon_form=CouponForm()
 	carts=Cart(request)
+
 	for cart in carts:
 		cart['updated_cart']=ProductCartForm(initial={'quantity':cart['quantity'],'override':True})
-
-
-	return render(request,'cart/cart_detail.html',{'carts':carts,'coupon_form':coupon_form})
+	context={'carts':carts,'coupon_form':coupon_form}
+	return render(request,'cart/cart_detail.html',context)

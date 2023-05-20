@@ -24,7 +24,10 @@ def create_order(request):
 				OrderItem.objects.create(order=order,product=item['product'],quantity=item['quantity'],price=item['price'])
 
 
+			
 			cart.clear()
+			
+
 			# time.sleep(60)
 			order_created.delay(order.id)
 			email_pdf.delay(order.id)
