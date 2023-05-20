@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django.core.validators import MinValueValidator,MaxValueValidator
 from django.urls import reverse
+from decimal import Decimal
 from shop.models import Product
 from coupons.models import Coupon
 
@@ -16,7 +17,7 @@ class Order(models.Model):
 	updated=models.DateTimeField(auto_now=True)
 	paid=models.BooleanField(default=False)
 	coupon=models.ForeignKey(Coupon,on_delete=models.SET_NULL,related_name='order',null=True,blank=True)
-	discount=models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(100)])
+	discount=models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(100)],default=0)
 
 	def order_detail(self):
 		url=reverse('admin-order',args=[self.id])
@@ -28,8 +29,17 @@ class Order(models.Model):
 	def __str__(self):
 		return f'order {self.id}'
 
-	def get_total_cost(self):
-		return sum(item.get_price() for item in self.order_items.all() )
+	def price_before_discount(self):
+		return  sum([item.price*item*quantity for item in self.order_items.all()])
+
+	def get_discount(self):
+		total_price=self.price_before_discount()
+		if self.discount:
+			return total_price*(self.discount/Decimal(100))
+		return Decimal(0)
+	def get_total_price(self):
+		total_price=self.price_before_discount()
+		return total_price-self.get_discount()
 
 
 

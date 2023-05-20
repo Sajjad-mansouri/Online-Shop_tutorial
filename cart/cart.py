@@ -51,11 +51,6 @@ class Cart:
 				pass
 		return None
 		
-	@property
-	def discount(self):
-		if self.coupon:
-			return (self.coupon.discount/Decimal(100))*self.get_total_price()
-		return Decimal(0)
 
 	def __iter__(self):
 
@@ -79,7 +74,7 @@ class Cart:
 	def price_before_discount(self):
 		return  sum([Decimal(item['price'])*item['quantity'] for item in self.cart.values()])
 
-
+	
 	def get_discount(self):
 		total_price=self.price_before_discount()
 		if self.coupon:

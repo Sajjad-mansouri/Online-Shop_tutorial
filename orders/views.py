@@ -22,7 +22,7 @@ def create_order(request):
 			order=form.save(commit=False)
 			if cart.coupon:
 				order.coupon=cart.coupon
-				order.discount=cart.discount
+				order.discount=cart.coupon.discount
 			order.save()
 			for item in cart:
 				OrderItem.objects.create(order=order,product=item['product'],quantity=item['quantity'],price=item['price'])
@@ -35,7 +35,7 @@ def create_order(request):
 			# time.sleep(60)
 			order_created.delay(order.id)
 			email_pdf.delay(order.id)
-			return render(request,'orders/create_order_done.html',{'order':order})
+			return render(request,'orders/create_order_done.html')
 
 	else:
 		form=OrderForm()
