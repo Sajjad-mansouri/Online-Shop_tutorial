@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from django.core.validators import MinValueValidator,MaxValueValidator
 from django.urls import reverse
 from shop.models import Product
+from coupons.models import Coupon
 
 class Order(models.Model):
 	first_name=models.CharField(max_length=50)
@@ -13,6 +15,8 @@ class Order(models.Model):
 	created=models.DateTimeField(auto_now_add=True)
 	updated=models.DateTimeField(auto_now=True)
 	paid=models.BooleanField(default=False)
+	coupon=models.ForeignKey(Coupon,on_delete=models.SET_NULL,related_name='order',null=True,blank=True)
+	discount=models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(100)])
 
 	def order_detail(self):
 		url=reverse('admin-order',args=[self.id])

@@ -17,11 +17,11 @@
 		</li>
 		{%endfor%}
 		<li>discount:
-			<span class='discount'>{{cart.discount}}</span>
+			<span class='discount'>{{cart.get_discount}}</span>
 		</li>
 
 	</ul>
-	<p>total cost:{{cart.get_total_price_with_discount}}</p>
+	<p>total cost:{{cart.get_total_price}}</p>
 	
 
 

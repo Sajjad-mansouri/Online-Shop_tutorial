@@ -75,11 +75,23 @@ class Cart:
 		lenght=sum(item['quantity'] for item in self.cart.values()	) 
 		return lenght
 
-	def get_total_price(self):
-		return sum([Decimal(item['price'])*item['quantity'] for item in self.cart.values()])
 
-	def get_total_price_with_discount(self):
-		return self.get_total_price()-self.discount
+	def price_before_discount(self):
+		return  sum([Decimal(item['price'])*item['quantity'] for item in self.cart.values()])
+
+
+	def get_discount(self):
+		total_price=self.price_before_discount()
+		if self.coupon:
+			return (self.coupon.discount/Decimal(100))*self.price_before_discount()
+		return Decimal(0)
+
+
+	def get_total_price(self):
+		total_price=self.price_before_discount()
+
+		return total_price - self.get_discount()
+
 
 	def clear(self):
 		del self.session[settings.CART_SESSION_ID]

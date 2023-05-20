@@ -57,14 +57,14 @@ cart history
 		</tr>
 		{%if carts.coupon%}
 		<tr class="discount">
-			<td>discount</td>
+			<td>{{carts.coupon.code}} coupon (%{{carts.coupon.discount}})</td>
 			<td colspan="4"></td>
-			<td class="num">-${{carts.discount}}</td>
+			<td class="num">-${{carts.get_discount}}</td>
 		</tr>
 		<tr class="total_with_discount">
 			<td>Total after discount</td>
 			<td colspan="4"></td>
-			<td class="num">${{carts.get_total_price_with_discount}}</td>
+			<td class="num">${{carts.get_total_price}}</td>
 		</tr>
 		{%endif%}
 	</tbody>
