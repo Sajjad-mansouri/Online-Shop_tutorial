@@ -72,11 +72,19 @@ detail
 
             </tr>
             {%endfor%}
+            {%if order.discount%}
+            <tr class='discount'>
+                
+                <td >discount(%{{order.discount}}):</td>
+                <td colspan="2"></td>
+                <td>{{order.get_discount}}</td>
+                
+            </tr>
+            {%endif%}
             <tr>
                 <td>total</td>
-                <td></td>
-                <td></td>
-                <td>{{order.get_total_cost}}</td>
+                <td colspan="2"></td>
+                <td>{{order.get_total_price}}</td>
 
             </tr>
         </tbody>
