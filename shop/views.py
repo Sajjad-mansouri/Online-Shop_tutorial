@@ -1,6 +1,9 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Product,Category
 from cart.forms import ProductCartForm
+from .recommender import Recommender
+import redis
+from django.conf import settings
 
 
 
@@ -22,7 +25,11 @@ def product_list(request,category_slug=None):
 
 
 def product_detail(request,id,product_slug):
+	re=redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
 	product_form=ProductCartForm()
 	product=get_object_or_404(Product,id=id,slug=product_slug,available=True)
-	return render(request,'shop/product/detail.html',{'product':product,'product_form':product_form})
+	r=Recommender()
+	recommended_products=r.suggest_product_for([product],3)
+	context={'product':product,'product_form':product_form,'recommended_products':recommended_products}
+	return render(request,'shop/product/detail.html',context)
 

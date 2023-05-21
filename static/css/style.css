@@ -101,3 +101,9 @@ body{
 .discount{
   color: red;
 }
+
+
+.recommendation{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+}

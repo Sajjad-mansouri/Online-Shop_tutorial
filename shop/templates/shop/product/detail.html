@@ -21,5 +21,19 @@
 	
 </form>
 
+{%if recommended_products%}
+<h1>recommended products</h1>
+<hr>
+<div class='recommendation'>
+
+{%for product in recommended_products%}
+<div class='item'>
+	<a href="{%url 'product-detail' product.id product.slug %}"><img src="{{product.image.url}}"></a>
+	<p>{{product.name}}</p>
+</div>
+{%endfor%}
+</div>
+{%endif%}
+
 </main>
 {%endblock%}

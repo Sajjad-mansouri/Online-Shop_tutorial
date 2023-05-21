@@ -5,6 +5,7 @@ from shop.models import Product
 from .forms import ProductCartForm
 from django.conf import settings
 from coupons.forms import CouponForm
+from shop.recommender import Recommender
 
 
 @require_POST
@@ -34,5 +35,14 @@ def cart_detail(request):
 
 	for cart in carts:
 		cart['updated_cart']=ProductCartForm(initial={'quantity':cart['quantity'],'override':True})
-	context={'carts':carts,'coupon_form':coupon_form}
+	r=Recommender()
+	cart_product=[item['product'] for item in carts]
+	if cart_product:
+		recommendation=r.suggest_product_for(cart_product,max_result=4)
+		print(recommendation)
+	else:
+		recommendation=[]
+
+
+	context={'carts':carts,'coupon_form':coupon_form,'recommended_products':recommendation}
 	return render(request,'cart/cart_detail.html',context)
