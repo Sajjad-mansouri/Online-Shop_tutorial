@@ -164,12 +164,12 @@ LOCALE_PATHS=[
 
 #parler configuration
 PARLER_LANGUAGES = {
-None: (
-{'code': 'en'},
-{'code': 'es'},
-),
-'default': {
-'fallback': 'en',
-'hide_untranslated': False,
-}
+    None: (
+    {'code': 'en'},
+    {'code': 'fa'},
+    ),
+    'default': {
+    'fallback': 'en',
+    'hide_untranslated': False,
+    }
 }

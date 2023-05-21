@@ -1,14 +1,15 @@
 from django.db import models
 from django.urls import reverse
+from parler.models import TranslatableModel,TranslatedFields
 
-class Category(models.Model):
-	name=models.CharField(max_length=100)
-	slug=models.SlugField(max_length=100)
+class Category(TranslatableModel):
+	translations=TranslatedFields(
+		name=models.CharField(max_length=100),
+		slug=models.SlugField(max_length=100),
+			)
 
-	class Meta:
-		ordering=('name',)
-		verbose_name='category'
-		verbose_name_plural='categories'
+
+ 
 	def get_absolute_url(self):
 		return reverse('category-list',args=[self.slug])
 	def __str__(self):
