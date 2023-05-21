@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-21 11:55+0000\n"
+"POT-Creation-Date: 2023-05-21 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: shop/templates/shop/base.html:34
 msgid "your cart"
 msgstr ""
+
+#: shop/templates/shop/base.html:37
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t \t%(items)s item ,$%(total)s\n"
+"\t\t\t\t"
+msgid_plural ""
+"\n"
+"\t\t\t\t\t%(items)s items ,$%(total)s\n"
+"\t\t\t\t"
+msgstr[0] ""
+msgstr[1] ""
 
 #: shop/templates/shop/base.html:45
 msgid "your cart is empty"
