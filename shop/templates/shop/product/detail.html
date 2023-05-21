@@ -1,5 +1,6 @@
 {%extends 'shop/base.html'%}
 {%load static%}
+{%load i18n%}
 {%block title%}
 
 {%endblock%}
@@ -17,12 +18,12 @@
 <form action="{%url 'add-cart' product.id %}" method="post" >
 	{%csrf_token%}
 		{{product_form}}
-		<input type="submit" >
+		<input type="submit"  value="{%trans 'add to cart'%}">
 	
 </form>
 
 {%if recommended_products%}
-<h1>recommended products</h1>
+<h1>{%trans 'people who bought this also bought'%}</h1>
 <hr>
 <div class='recommendation'>
 

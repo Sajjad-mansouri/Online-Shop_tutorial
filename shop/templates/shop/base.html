@@ -1,4 +1,5 @@
 {%load static%}
+{%load i18n%}
 {%load custom_tags %}
 <!DOCTYPE html>
 <html>
@@ -14,27 +15,35 @@
 		<a href="" title="" id='home'>home</a>
 
 		<div class='category'>
-				{% with categories=category_list%}
-			<!-- {%category_list as categories%} -->
-			{%if categories%}
-				{%for cat in categories%}
-			
-			<a href="" title="">{{cat.name}}</a>
-			
-			{%endfor%}
-			{%endif%}
-{%endwith%}
+			{% with categories=category_list%}
+				<!-- {%category_list as categories%} -->
+				{%if categories%}
+					{%for cat in categories%}
+					
+						<a href="" title="">{{cat.name}}</a>
+					
+					{%endfor%}
+				{%endif%}
+			{%endwith%}
 		</div>
 		<a href="" title="">login</a>
 		<a href="" title="">profile</a>
 		<div class='cart'>
 			{%with total_cart=cart|length%}
 			{%if total_cart > 0 %}
-
-		<a href="{%url 'cart-detail'%}"><span>your cart: {{total_cart}} items</span></a>	
-		<span>{{ cart.get_total_price }}</span>
+			{%trans 'your cart'%}:
+		<a href="{%url 'cart-detail'%}">
+			<span>
+				{%blocktrans with total=cart.get_total_price count items=total_cart%}
+				 	{{items}} item ,${{ total }}
+				{%plural%}
+					{{items}} items ,${{ total }}
+				{%endblocktrans%}
+			</span>
+		</a>	
 		{%else%}
-		your cart is empty
+		{%trans 'your cart is empty'%}
+		
 		{%endif%}
 		{%endwith%}
 		</div>

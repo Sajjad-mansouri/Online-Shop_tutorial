@@ -17,31 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: orders/models.py:11
-msgid "first_name"
+#: shop/templates/shop/base.html:34
+msgid "your cart"
 msgstr ""
 
-#: orders/models.py:12
-msgid "last_name"
+#: shop/templates/shop/base.html:45
+msgid "your cart is empty"
 msgstr ""
 
-#: orders/models.py:13
-msgid "email"
+#: shop/templates/shop/product/detail.html:21
+msgid "add to cart"
 msgstr ""
 
-#: orders/models.py:14
-msgid "address"
-msgstr ""
-
-#: orders/models.py:15
-msgid "city"
-msgstr ""
-
-#: orders/models.py:16
-msgid "postalcode"
-msgstr ""
-
-#: orders/templates/orders/create_order.html:9
-msgid "place order"
+#: shop/templates/shop/product/detail.html:26
+msgid "people who bought this also bought"
 msgstr ""
