@@ -4,6 +4,7 @@ from cart.forms import ProductCartForm
 from .recommender import Recommender
 import redis
 from django.conf import settings
+from cart.cart import Cart
 
 
 
