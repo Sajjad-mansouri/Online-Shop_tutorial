@@ -173,3 +173,6 @@ PARLER_LANGUAGES = {
     'hide_untranslated': False,
     }
 }
+#format localization
+#display dates, times, and numbers in different formats.
+USE_L10N=True
